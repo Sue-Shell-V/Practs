@@ -94,6 +94,31 @@ def quick_sort(list,first,last):
     list[low] = mid_value
     quick_sort(list,first,low-1)
     quick_sort(list,low+1,last)
+    
+def merge_sort(list):
+    """归并排序"""
+    n = len(list)
+    if n <=1:
+        return list
+    mid = n // 2
+    #left 采用归并排序后形成的有序的新的列表
+    left_li = merge_sort(list[:mid])
+    # right 采用归并排序后形成的有序的新的列表
+    right_li = merge_sort(list[mid:])
+    #将两个有序的子序列合并为一个新的整体
+    #merge(left_li,right_li)
+    left_p,right_p = 0,0
+    result = []
+    while left_p < len(left_li) and right_p < len(right_li):
+        if left_li[left_p] < right_li[right_p]:
+            result.append(left_li[left_p])
+            left_p += 1
+        else:
+            result.append(right_li[right_p])
+            right_p += 1
+    result += left_li[left_p:]
+    result += right_li[right_p:]
+    return result    
 
 li = [2,6,2,9,6,8,0,21,2,3,7,6,11,5,90,2,85,4,62]
 print(bubble_sort([1,2,1,5,55,2,455,2,6,3,9,12,36,10,12,15,6,81,40,123,6,35,70,36]))
